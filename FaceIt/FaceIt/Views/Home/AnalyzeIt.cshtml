@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "AnalyzeIt";
+}
+
+@section GetStarted {
+<div class="section">
+    <div class="getCenterDiv">
+        <h1>AnalyzeIt</h1>
+        <h3>Web-application based on Microsoft cognitive services</h3>
+
+        <button type="button" id="buttonScroll">Get Started Now</button>
+    </div>
+</div>
+}
+
+
+@section Chooser {
+<div class="section">
+    <div class="getCenterDiv">
+        <h3>Chooser</h3>
+        <h3>Choose section what you want to do.</h3>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-sm-4">
+                <a href="@Url.Action("Index", "Face")" class="thumbnail">
+                    <img src="~/Content/img/FaceDetection.png" alt="...">
+                    <div class="caption">
+                        <h4 class="card-title">Face Detection</h4>
+                        
+                     </div>
+</a>
+            </div>
+
+            <div class="col-sm-4">
+                <a href="@Url.Action("Index", "Emotion")" class="thumbnail">
+                    <img src="~/Content/img/EmotionExplorer.png" alt="...">
+                    <div class="caption">
+                        <h4 class="card-title">Emotion Explorer</h4>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-4">
+                <a href="@Url.Action("Index", "Image")" class="thumbnail">
+                    <img src="~/Content/img/ImageAnalyze.png" alt="...">
+                    <div class="caption">
+                        <h4 class="card-title">Image Analyzer</h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+
+
+
+

@@ -1,0 +1,238 @@
+﻿body {
+    /*padding-top: 50px;*/
+    /*padding-bottom: 20px;*/
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    /*padding-left: 15px;
+    padding-right: 15px;*/
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+
+.loadmore {
+    text-align: left;
+    padding-top: 7px;
+    margin-top: 5px;
+    background: #fff;
+    display: block;
+    width: 50%;
+}
+
+.color-red {
+    color: #fbc10b;
+    /*text-transform: lowercase;
+    font-style: italic;*/
+}
+
+.color-green {
+    color: green;
+}
+
+.color-blue {
+    color: #53bee6;
+    text-transform: lowercase;
+    font-style: italic;
+}
+
+.color-orange {
+    color: #fbc10b;
+    text-transform: lowercase;
+    font-style: italic;
+}
+
+.error {
+    color: red;
+}
+
+.facePreview_thumb_big {
+    position: relative;
+    display: grid;
+}
+
+.facePreview_thumb_big .divRectangle_box {
+    opacity: .75;
+    transition: opacity .55s ease-out;
+}
+
+
+    .facePreview_thumb_big .divRectangle_box:hover {
+        opacity: .85;
+            
+        transition: opacity .55s ease-out;
+    }
+
+.facePreview_thumb_small {
+    display: block;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: scroll;
+    padding: 0px;
+    margin: 0px;
+}
+
+.facePreview_thumb_small img {
+    padding: 3px;
+    border: 1px solid #eee;
+    margin: 2px;
+}
+
+.facePreview_thumb_small ul {
+    margin-top: 10px;
+    margin-left: 25px;
+    padding: 0px;
+}
+
+    .facePreview_thumb_small ul li {
+        color: #222;
+        list-style-type: square;
+    }
+
+
+
+
+.divRectangle_box:hover * {
+    opacity: 1;
+}
+
+.divRectangle_box {
+    border-radius: 2px;
+    border: 2px solid #005ca4;
+    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    /*left: -1000px;*/
+    position: absolute;
+    /*top: -1000px;*/
+}
+
+.arrow {
+    border-bottom: 10px solid white;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    left: 50%;
+    margin-left: -5px;
+    bottom: -12px;
+    opacity: 0;
+}
+
+.fTableinfo {
+    width: auto;
+    visibility: visible;
+    background-color: gray;
+    color: #fff;
+    padding: 5px;
+    z-index: 100;
+    position: absolute;
+    top: -5px;
+    right: 110%;
+    font-size: 12px;
+    line-height: 1.5;
+    border-collapse: unset;
+    font-family: 'Segoe UI',SegoeUI,'Segoe WP',Tahoma,Arial,sans-serif;
+}
+
+
+.fTableinfo td {
+    text-align: right;
+    border: 1px solid pink;
+}
+
+.fTableinfo th {
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 1px solid red;
+}
+
+/*.divRectangle_box .face-info:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent gray
+}*/
+
+.divRectangle_box:hover {
+    z-index: 100
+}
+
+.divRectangle_box:hover .fTableinfo {
+    visibility: visible
+}
+
+.divRectangle_box:active .fTableinfo {
+visibility: visible
+}
+
+.getCenterDiv {
+    width: 50%;
+    margin: 0 auto;
+    text-align:center;
+}
+
+    .getCenterDiv h1 {
+        font-size: 8em;
+        font-weight: 900;
+    
+    }
+
+    .getCenterDiv h3 {
+        font-size: 1.65em;
+        font-weight: 100;
+        padding: 7px;
+    }
+
+#buttonScroll {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+    color: #ffffff;
+    background-color: #428bca;
+    border-color: #357ebd;
+    margin-bottom: 0;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid ;
+}
+
+.dropzone {
+    background: white;
+    border-radius: 5px;
+    border: 2px dashed rgb(0, 135, 247);
+    border-image: none;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Roboto, "Open Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+}
+
+    .dropzone input {
+        visibility: hidden;
+    }
