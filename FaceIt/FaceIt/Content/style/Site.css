@@ -182,24 +182,42 @@ textarea {
 .divRectangle_box:active .fTableinfo {
 visibility: visible
 }
+.centerNav  {
+
+}
 
 .getCenterDiv {
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
-    text-align:center;
+    text-align: center;
 }
 
     .getCenterDiv h1 {
-        font-size: 8em;
+        font-size: 5em;
         font-weight: 900;
     
     }
 
     .getCenterDiv h3 {
-        font-size: 1.65em;
+        font-size: 1.25em;
         font-weight: 100;
         padding: 7px;
     }
+
+.chooserCenter {
+    width: 65%;
+    margin: 0 auto;
+    text-align: center;
+
+}
+
+    .chooserCenter h3 {
+        font-size: 1.2em;
+        padding: 7px;
+    }
+.faceDetectMainDiv {
+    font-size: 14px;
+}
 
 #buttonScroll {
     padding: 10px 16px;
@@ -218,21 +236,3 @@ visibility: visible
     cursor: pointer;
     border: 1px solid ;
 }
-
-.dropzone {
-    background: white;
-    border-radius: 5px;
-    border: 2px dashed rgb(0, 135, 247);
-    border-image: none;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: Roboto, "Open Sans", sans-serif;
-    font-size: 20px;
-    font-weight: 300;
-    text-rendering: optimizeLegibility;
-}
-
-    .dropzone input {
-        visibility: hidden;
-    }

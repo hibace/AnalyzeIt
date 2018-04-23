@@ -63,9 +63,17 @@
 
 //};
 
+var convertUrlToFile = function (url) {
+    return new File(url);
+}
+
 $(document).ready(function () {
     AOS.init();
-    $('#fullpage').fullpage();
+    $('#fullpage').fullpage({
+        anchors: ['AnalyzeIt', 'Chooser', 'FaceDetect', 'EmotionExplorer', 'ImageAnalyzer', 'Contacts'],
+        menu: '#myMenu'
+    });
+    
 });
 
 
@@ -73,3 +81,4 @@ $(document).ready(function () {
 $(document).on('click', '#buttonScroll', function () {
     $.fn.fullpage.moveSectionDown();
 });
+

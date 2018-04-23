@@ -1249,9 +1249,10 @@ pre code {
 }
 
 @media (min-width: 1200px) {
-  .container {
-    max-width: 1170px;
-  }
+    .container {
+        max-width: 1170px;
+        text-align: center;
+    }
   .col-lg-1,
   .col-lg-2,
   .col-lg-3,
@@ -3817,10 +3818,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
   clear: both;
 }
 
-.nav > li {
-  position: relative;
-  display: block;
-}
+    .nav > li {
+        position: relative;
+        display: inline-block;
+        font-size: 15px;
+    }
 
 .nav > li > a {
   position: relative;
@@ -3878,6 +3880,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   line-height: 1.428571429;
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
+
 }
 
 .nav-tabs > li > a:hover {
@@ -4279,12 +4282,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 @media (min-width: 768px) {
-  .navbar-nav {
-    float: left;
-    margin: 0;
-  }
+    .navbar-nav {
+        float: none;
+        margin: 0;
+    }
   .navbar-nav > li {
-    float: left;
+    float: none;
   }
   .navbar-nav > li > a {
     padding-top: 15px;

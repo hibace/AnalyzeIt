@@ -4,57 +4,236 @@
     ViewBag.Title = "AnalyzeIt";
 }
 
-@section GetStarted {
-<div class="section">
-    <div class="getCenterDiv">
-        <h1>AnalyzeIt</h1>
-        <h3>Web-application based on Microsoft cognitive services</h3>
+@section AnalyzeIt {
+    <div class="section">
+        <div class="getCenterDiv">
+            <h1 class="text-center">AnalyzeIt</h1>
+            <h3>Web-application based on Microsoft cognitive services</h3>
 
-        <button type="button" id="buttonScroll">Get Started Now</button>
+            <button type="button" id="buttonScroll">Get Started Now</button>
+        </div>
     </div>
-</div>
 }
 
 
 @section Chooser {
-<div class="section">
-    <div class="getCenterDiv">
-        <h3>Chooser</h3>
-        <h3>Choose section what you want to do.</h3>
-    </div>
-    <div>
-        <div class="row">
-            <div class="col-sm-4">
-                <a href="@Url.Action("Index", "Face")" class="thumbnail">
-                    <img src="~/Content/img/FaceDetection.png" alt="...">
-                    <div class="caption">
-                        <h4 class="card-title">Face Detection</h4>
-                        
-                     </div>
-</a>
-            </div>
 
-            <div class="col-sm-4">
-                <a href="@Url.Action("Index", "Emotion")" class="thumbnail">
-                    <img src="~/Content/img/EmotionExplorer.png" alt="...">
-                    <div class="caption">
-                        <h4 class="card-title">Emotion Explorer</h4>
-                    </div>
-                </a>
-            </div>
+    <div class="section">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="chooserCenter">
+                    <h3>Choose section what you want to do</h3>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <a href="#FaceDetect" class="thumbnail">
+                                <img src="~/Content/img/FaceDetection.png" alt="...">
+                                <div class="caption">
+                                    <h4 class="card-title">Face Detection</h4>
 
-            <div class="col-sm-4">
-                <a href="@Url.Action("Index", "Image")" class="thumbnail">
-                    <img src="~/Content/img/ImageAnalyze.png" alt="...">
-                    <div class="caption">
-                        <h4 class="card-title">Image Analyzer</h4>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <a href="#EmotionExplorer" class="thumbnail">
+                                <img src="~/Content/img/EmotionExplorer.png" alt="...">
+                                <div class="caption">
+                                    <h4 class="card-title">Emotion Explorer</h4>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <a href="#ImageAnalyzer" class="thumbnail">
+                                <img src="~/Content/img/ImageAnalyze.png" alt="...">
+                                <div class="caption">
+                                    <h4 class="card-title">Image Analyzer</h4>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 }
+
+@section FaceDetect {
+    <div class="section">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="faceDetectMainDiv">
+                    <div ng-app="analyzeApp" class="ng-cloak" ng-controller="faceDetectionCtrl">
+
+                        <h3>{{Title}}</h3>
+                        <div class="clearfix"></div>
+                        <table style="width:100%">
+                            <tr>
+                                <th><h4>Select Query Face</h4></th>
+                                <th><h4>Detection Result</h4></th>
+                            </tr>
+                            <tr>
+                                <td style="width:60%" valign="top">
+                                    <form class="form-inline" novalidate name="f1">
+                                        @*<div class="alert alert-success">
+                                                <div ng-show="loaderMoreupl" ng-class="result">
+                                                    <img src="~/Content/ng-loader.gif" />
+                                                    {{uplMessage}}
+                                                </div>
+                                            </div>*@
+                                        <div class="form-group mx-sm-3 mb-2">
+                                            <input type="text" class="form-control" name="source" id="urlInput" placeholder="Image Url">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mb-2" onclick="angular.element(document.querySelector('#urlInput')).scope().selectCandidateFileforUpload(document.querySelector('#urlInput'))">Upload</button>
+
+                                        <label class="btn btn-default btn-file">
+                                            Browse <input id="fileInput" style="display: none;" type="file" name="source" accept="image/*" onchange="angular.element(this).scope().selectCandidateFileforUpload(this)" required>
+                                        </label>
+
+                                        @*<input id="fileInput" type="file" name="source" accept="image/*" onchange="angular.element(this).scope().selectCandidateFileforUpload(this)" required />*@
+                                        @*<input id="urlInput" class="form-control" type="text" name="source" onchange="angular.element(this).scope().selectCandidateFileforUpload(this)" required />*@
+                                        
+                                    </form>
+
+                                    <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
+
+                                    <div class="clearfix"></div>
+                                    <div class="loadmore">
+                                        <div ng-show="loaderMore" ng-class="result">
+                                            @*<img src="~/Content/ng-loader.gif" />*@
+                                            {{faceMessage}}
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="facePreview_thumb_big" id="faceCanvas"></div>
+                                </td>
+                                <td style="width:40%" valign="top">
+                                    <p>{{DetectedResultsMessage}}</p>
+                                    <hr />
+                                    <div class="clearfix"></div>
+                                    <div class="facePreview_thumb_small">
+                                        <div ng-repeat="item in DetectedFaces" class="col-sm-12">
+                                            <div class="col-sm-3">
+                                                <img ng-src="{{item.FilePath}}" width="100" />
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <ul>
+                                                    @*<li>FaceId: {{item.FaceId}}</li>*@
+                                                    <li>Age: {{item.Age}}</li>
+                                                    <li>Gender: {{item.Gender}}</li>
+                                                    <li>{{item.IsSmiling}}</li>
+                                                    <li>{{item.Glasses}}</li>
+                                                    <li>Emotions:</li>
+                                                    <div ng-repeat="emotion in item.Emotion">
+                                                        <li style="List-style-type: none">  {{emotion.Key}} = {{emotion.Value}} </li>
+                                                    </div>
+                                                </ul>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <div ng-hide="DetectedFaces.length">No face detected!!</div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section EmotionExplorer{
+    <div class="section">
+        <div class="getCenterDiv">
+            <h3>EmotionExplorer</h3>
+            <p>Emotion Explorer shows what emotion are people feel.</p>
+        </div>
+    </div>
+}
+
+@section ImageAnalyzer{
+    <div class="section">
+        <div class="getCenterDiv">
+            <h3>ImageAnalyzer</h3>
+            <p>ImageAnalyzer analyze photo and returns tags and description.</p>
+        </div>
+    </div>
+}
+
+
+
+@section Contacts{
+    <div class="section">
+        <div class="messages"></div>
+
+        <div class="controls">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_name">Firstname *</label>
+                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_lastname">Lastname *</label>
+                        <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_email">Email *</label>
+                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_phone">Phone</label>
+                        <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Please enter your phone">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="form_message">Message *</label>
+                        <textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please,leave us a message."></textarea>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-success btn-send" value="Send message">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-muted"><strong>*</strong> These fields are required. Contact form template by <a href="http://bootstrapious.com" target="_blank">Bootstrapious</a>.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+}
+
+
+
+
+@section NgScript{
+    <script src="~/ScriptsNg/FaceDetectionCtrl.js"></script>
+}
+
+
 
 
 

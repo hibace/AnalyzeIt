@@ -13,32 +13,40 @@
 </head>
 <body>
 
+    
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                @*<div class="navbar-header">
+                <a class="navbar-brand" href="#Chooser">AnalyzeIt</a>
+            </div>*@
 
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href=@Url.Action("AnalyzeIt", "Home")>AnalyzeIt</a>
-            </div>
+                <ul id="myMenu" class="nav navbar-nav">
+                    <li data-menuanchor="AnalyzeIt" class="active"><a href="#AnalyzeIt">Home</a></li>
+                    <li data-menuanchor="Chooser" class="active"><a href="#Chooser">AnalyzeIt</a></li>
+                    <li data-menuanchor="FaceDetect"><a href="#FaceDetect">Face Detect</a></li>
+                    <li data-menuanchor="EmotionExplorer"><a href="#EmotionExplorer">Emotion Explorer</a></li>
+                    <li data-menuanchor="ImageAnalyzer"><a href="#ImageAnalyzer">Image Analyzer</a></li>
+                    <li data-menuanchor="Contacts"><a href="#Contacts">Contacts</a></li>
 
-            <ul class="nav navbar-nav">
-                <li><a href="@Url.Action("Index", "Face")">Face Detect</a></li>
+                    @*<li><a href="@Url.Action("Index", "Face")">Face Detect</a></li>
                 <li><a href="@Url.Action("Index", "Emotion")">Emotion Explorer</a></li>
                 <li><a href="@Url.Action("Index", "Image")">Image Analyzer</a></li>
-                @*<li><a href="">Contacts</a></li>*@
-                <li><a href="@Url.Action("Index", "Contact")">Contacts</a></li>
-            </ul>
-        </div>
-    </nav>
+                <li><a href="@Url.Action("Index", "Contact")">Contacts</a></li>*@
+                </ul>
+            </div>
+</nav>
+    
+    <div class="jumbotron">
 
-    <div class="container">
-
-            <div>
-           
-                @if (IsSectionDefined("GetStarted") && IsSectionDefined("Chooser"))
+                @if (IsSectionDefined("AnalyzeIt") && IsSectionDefined("Chooser"))
                 {
                     <div id="fullpage">
-                        @RenderSection("GetStarted")
+                        @RenderSection("AnalyzeIt")
                         @RenderSection("Chooser")
+                        @RenderSection("FaceDetect")
+                        @RenderSection("EmotionExplorer")
+                        @RenderSection("ImageAnalyzer")
+                        @RenderSection("Contacts")
                     </div>
                 }
                 else
@@ -48,12 +56,10 @@
 
 
 
-                    </div>
 
-
-            <footer>
+            @*<footer>
                 <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
+            </footer>*@
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="~/Content/js/bootstrap.min.js"></script>

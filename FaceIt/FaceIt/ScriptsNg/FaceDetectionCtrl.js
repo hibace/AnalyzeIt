@@ -8,43 +8,71 @@
         $scope.SimilarFace = [];
         $scope.FaceRectangles = [];
         $scope.DetectedFaces = [];
+        angular.forEach(angular.element("input[name='source']"), function (el) {
+            angular.element(el).val(null);
+        });
+        
 
         //File Select & Save 
         $scope.selectCandidateFileforUpload = function (file) {
-            $scope.SelectedFileForUpload = file;
-            $scope.loaderMoreupl = true;
-            $scope.uplMessage = 'Uploading, please wait....!';
-            $scope.result = "color-red";
+            
+            if (file != null) {
 
-            //Save File
-            var uploaderUrl = "/Face/SaveCandidateFiles";
-            var fileSave = FileUploadService.UploadFile($scope.SelectedFileForUpload, uploaderUrl);
-            fileSave.then(function (response) {
-                if (response.data.Status) {
-                    $scope.GetDetectedFaces();
-                    angular.forEach(angular.element("input[type='file']"), function (inputElem) {
-                        angular.element(inputElem).val(null);
+                $scope.SelectedFileForUpload = (file.getAttribute('type') == "text") ? file.value : file.files;
+
+                $scope.loaderMoreupl = true;
+                $scope.uplMessage = 'Uploading, please wait....!';
+                $scope.result = "color-red";
+
+                //Save File
+                var uploaderForFiles = "/Face/SaveCandidateFiles";
+                var uploaderForImageUrl = "/Face/SaveByUrl";
+
+                var formData = new FormData();
+
+                var uploader = (typeof ($scope.SelectedFileForUpload) == "string") ? uploaderForImageUrl : uploaderForFiles;
+
+
+                if (uploader == uploaderForImageUrl) {
+                    formData.append('file', $scope.SelectedFileForUpload);
+                } else {
+                    angular.forEach($scope.SelectedFileForUpload, function (f, i) {
+                        formData.append("file", $scope.SelectedFileForUpload[i]);
                     });
-
-                    $scope.f1.$setPristine();
-                    $scope.uplMessage = response.data.Message;
-                    $scope.loaderMoreupl = false;
                 }
-            },
-                function (error) {
-                    console.warn("Error: " + error);
-                });
+
+                var postFile = FileUploadService.PostFile(formData, uploader);
+
+
+                postFile.then(function (response) {
+                    if (response.status == 200) {
+
+                       
+                        $scope.GetDetectedFaces();
+                        angular.forEach(angular.element("input[name='source']"), function (inputElem) {
+                            angular.element(inputElem).val(null);
+                        });
+
+                        $scope.f1.$setPristine();
+                        $scope.uplMessage = response.data.Message;
+                        $scope.loaderMoreupl = false;
+
+                    }
+                }, function (error) { console.warn("Error: " + error); }
+                );
+            }
         }
 
         //Get Detected Faces
         $scope.GetDetectedFaces = function () {
-            $scope.loaderMore = true;
+            $scope.loaderMore = false;
             $scope.faceMessage = 'Preparing, detecting faces, please wait....!';
             $scope.result = "color-red";
 
             var fileUrl = "/Face/GetDetectedFaces";
             var fileView = FileUploadService.GetUploadedFile(fileUrl);
             fileView.then(function (response) {
+                
                 $scope.QueryFace = response.data.QueryFaceImage;
                 $scope.DetectedResultsMessage = response.data.DetectedResults;
                 $scope.DetectedFaces = response.data.FaceInfo;
@@ -118,27 +146,43 @@
     }
 })
 
-.factory('FileUploadService', function ($http, $q, $compile) {
+.factory('FileUploadService', function ($http, $q) {
     var fact = {};
 
-    fact.UploadFile = function (files, uploaderUrl) {
-        var formData = new FormData();
-        angular.forEach(files, function (f, i) {
-            formData.append("file", files[i]);
-        });
+    fact.PostFile = function (formData, uploaderUrl) {
+        
         var request = $http({
             method: "post",
             url: uploaderUrl,
             data: formData,
             withCredentials: true,
             headers: { 'Content-Type': undefined },
-            transformRequest: angular.identity
+            transformRequest: angular.identity,
+            eventHandlers: {
+                progress: function (event) {
+                    
+                }
+            },
+            uploadEventHandlers: {
+                progress: function (object) {
+                    
+                }
+            }
         });
+
         return request;
     }
+
+
+
     fact.GetUploadedFile = function (fileUrl) {
-        return $http.get(fileUrl);
+        var request = $http({
+            method: "GET",
+            url: fileUrl
+        });
+
+        return request;
     }
-   
+    
     return fact;
 })

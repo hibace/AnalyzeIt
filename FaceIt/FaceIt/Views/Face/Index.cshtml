@@ -7,7 +7,8 @@
     <h3>{{Title}}</h3>
     <div class="loadmore">
         <div ng-show="loaderMoreupl" ng-class="result">
-            <img src="~/Content/ng-loader.gif" /> {{uplMessage}}
+            @*<img src="~/Content/ng-loader.gif" />*@ 
+            {{uplMessage}}
         </div>
     </div>
     <div class="clearfix"></div>
@@ -18,14 +19,16 @@
         </tr>
         <tr>
             <td style="width:60%" valign="top">
-                <form novalidate  name="f1">
-                
-                        <input type="file" name="file" accept="image/*" onchange="angular.element(this).scope().selectCandidateFileforUpload(this.files)" required />
+                <form novalidate name="f1">
+                    <input id="fileInput" type="file" name="source" accept="image/*" onchange="angular.element(this).scope().selectCandidateFileforUpload(this)" required />
+                    <input id="urlInput" type="text" name="source" onchange="angular.element(this).scope().selectCandidateFileforUpload(this)" required />
                 </form>
+
                 <div class="clearfix"></div>
                 <div class="loadmore">
                     <div ng-show="loaderMore" ng-class="result">
-                        <img src="~/Content/ng-loader.gif" /> {{faceMessage}}
+                        @*<img src="~/Content/ng-loader.gif" />*@ 
+                        {{faceMessage}}
                     </div>
                 </div>
                 <div class="clearfix"></div>

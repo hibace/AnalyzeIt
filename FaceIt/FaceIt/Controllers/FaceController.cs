@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using VideoFrameAnalyzer;
 using OpenCvSharp;
+using System.Net;
 
 namespace FaceIt.Controllers
 {
@@ -58,23 +59,60 @@ namespace FaceIt.Controllers
         {
             return View();
         }
-        
-        //public async Task<CameraResult> GetFrames(VideoFrame frame)
-        //{
-        //    FaceServiceClient faceClient = new FaceServiceClient(Token, EndPoint);
 
-        //    FrameGrabber<Face[]> grabber = new FrameGrabber<Face[]>();
+        [HttpPost]
+        public JsonResult SaveByUrl()
+        {
+            string message = string.Empty, fileName = string.Empty, actualFileName = string.Empty; bool flag = false;
+            //Requested File Collection
+            var request = System.Web.HttpContext.Current.Request.Form;
+           
+            
+            if (request != null || request.Count != 0)
+            {
+                //Create New Folder
+                CreateDirectory();
 
-        //    // Set up Face API call, which returns a Face[]. Simply encodes image and submits to Face API. 
-        //    grabber.AnalysisFunction = async frame => return await faceClient.DetectAsync(frame.Image.ToMemoryStream(".jpg"));
+                //Clear Existing File in Folder
+                ClearDirectory();
+                
+                for (int i = 0; i < request.Count; i++)
+                {
+                    var imageUrl = request["file"];
+                    
+                    try
+                    {
+                        var webRequest = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(imageUrl);
+                        webRequest.AllowWriteStreamBuffering = true;
+                        webRequest.Timeout = 30000;
 
-        //    // Tell grabber to call the Face API every 3 seconds. 
-        //    grabber.TriggerAnalysisOnInterval(TimeSpan.FromMilliseconds(3000));
+                        var webResponse = webRequest.GetResponse();
 
+                        var stream = webResponse.GetResponseStream();
 
-        //    // Start running. 
-        //    await grabber.StartProcessingCameraAsync();
-        //}
+                        var image = System.Drawing.Image.FromStream(stream);
+                        fileName = Guid.NewGuid() + Path.GetExtension(imageUrl);
+                        image.Save(Path.Combine(Server.MapPath(directory), fileName));
+                        message = "File uploaded successfully";
+                        UplImageName = fileName;
+                        flag = true;
+                    }
+                    catch (Exception)
+                    {
+                        message = "File upload failed! Please try again";
+                    }
+                }
+            }
+            return new JsonResult
+            {
+                Data = new
+                {
+                    Message = message,
+                    UplImageName = fileName,
+                    Status = flag
+                }
+            };
+        }
 
         [HttpPost]
         public JsonResult SaveCandidateFiles()
@@ -120,6 +158,7 @@ namespace FaceIt.Controllers
                 }
             };
         }
+        
 
         [HttpGet]
         public async Task<dynamic> GetDetectedFaces()
@@ -196,11 +235,11 @@ namespace FaceIt.Controllers
                         }
                     }
                 }
-                catch (FaceAPIException ex)
+                catch (FaceAPIException)
                 {
-                    var temp = ex.ErrorMessage;
-                    var temp1 = ex.ErrorCode;
-                    var temp2 = ex.HttpStatus.ToString();
+                    //var temp = ex.ErrorMessage;
+                    //var temp1 = ex.ErrorCode;
+                    //var temp2 = ex.HttpStatus.ToString();
                 }
             }
             return new JsonResult
