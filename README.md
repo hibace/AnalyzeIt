@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/hibace/AnalyzeIt/blob/master/scr/AnalyzeIt.png" width="750"/>
+  <img src="https://github.com/hibace/AnalyzeIt/blob/master/scr/Preview.png" />
 </p>
 
 # AnalyzeIt
