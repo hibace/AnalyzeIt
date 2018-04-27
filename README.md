@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://github.com/hibace/AnalyzeIt/blob/master/scr/Preview.png" />
    <p><a href="https://github.com/hibace/AnalyzeIt/tree/master/scr"> Work Examples</a> </p>
-  <p><a href="analyzeit.azurewebsites.net"> Demo</a> </p>
+  <p><[analyzeit.azurewebsites.net](Demo)</p>
  
 </p>
 
