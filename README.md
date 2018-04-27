@@ -1,11 +1,10 @@
 <p align="center">
   <img src="https://github.com/hibace/AnalyzeIt/blob/master/scr/Preview.png" />
-   <p><a href="https://github.com/hibace/AnalyzeIt/tree/master/scr"> Work Examples</a> </p>
-  <p>[Demo](https://analyzeit.azurewebsites.net)</p>
-  
- 
+  <p><a href="https://github.com/hibace/AnalyzeIt/tree/master/scr"> Work Examples</a> </p>
 </p>
 
+
+[Demo](https://analyzeit.azurewebsites.net)
 # AnalyzeIt
 Web-application based on Microsoft cognitive services using ASP.NET MVC &amp; AngularJS
 
