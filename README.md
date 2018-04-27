@@ -21,5 +21,5 @@ AnalyzeIt consists of main three sections
 Allows users detect faces on images and get infromation about age, gender, smile and glasses.
 #### Emotion Explorer
 Describe uploaded image in eight main emotions like anger, contempt, fear, happiness, surprise, disgust, sadness, neautral,.
-
-
+#### Image Analyzer
+By the usage shows information about image as description, tags, format, size and accent color.
