@@ -70,6 +70,7 @@ var convertUrlToFile = function (url) {
 $(document).ready(function () {
     AOS.init();
     $('#fullpage').fullpage({
+        scrollOverflow: true,
         anchors: ['AnalyzeIt', 'Chooser', 'FaceDetect', 'EmotionExplorer', 'ImageAnalyzer', 'Contacts'],
         menu: '#myMenu'
     });
@@ -78,7 +79,8 @@ $(document).ready(function () {
 
 
 
-$(document).on('click', '#buttonScroll', function () {
-    $.fn.fullpage.moveSectionDown();
-});
+
+//$(document).on('click', '#buttonScroll', function () {
+//    $.fn.fullpage.moveSectionDown();
+//});
 

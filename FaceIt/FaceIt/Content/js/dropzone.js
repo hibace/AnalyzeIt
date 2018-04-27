@@ -356,7 +356,7 @@ var Dropzone = function (_Emitter) {
          * See the [enqueuing file uploads](#enqueuing-file-uploads) documentation
          * section for more information.
          */
-        autoProcessQueue: true,
+        autoProcessQueue: false,
 
         /**
          * If false, files added to the dropzone will not be queued by default.
@@ -384,7 +384,7 @@ var Dropzone = function (_Emitter) {
          * dropzone to trigger file selection) will be appended to. This might
          * be important in case you use frameworks to switch the content of your page.
          */
-        hiddenInputContainer: "body",
+        hiddenInputContainer: ".dropzone",
 
         /**
          * If null, no capture type will be specified
@@ -1205,7 +1205,7 @@ var Dropzone = function (_Emitter) {
           if (_this3.options.maxFiles === null || _this3.options.maxFiles > 1) {
             _this3.hiddenFileInput.setAttribute("multiple", "multiple");
           }
-          _this3.hiddenFileInput.className = "dz-hidden-input";
+          //_this3.hiddenFileInput.className = "dz-hidden-input";
 
           if (_this3.options.acceptedFiles !== null) {
             _this3.hiddenFileInput.setAttribute("accept", _this3.options.acceptedFiles);
@@ -1216,16 +1216,21 @@ var Dropzone = function (_Emitter) {
 
           // Not setting `display="none"` because some browsers don't accept clicks
           // on elements that aren't displayed.
-          _this3.hiddenFileInput.style.visibility = "hidden";
-          _this3.hiddenFileInput.style.position = "absolute";
-          _this3.hiddenFileInput.style.top = "0";
-          _this3.hiddenFileInput.style.left = "0";
-          _this3.hiddenFileInput.style.height = "0";
-          _this3.hiddenFileInput.style.width = "0";
-          document.querySelector(_this3.options.hiddenInputContainer).appendChild(_this3.hiddenFileInput);
+          //_this3.hiddenFileInput.style.visibility = "hidden";
+          _this3.hiddenFileInput.style.display = "none";
+          _this3.hiddenFileInput.setAttribute("id", "fileInput");
+          //_this3.hiddenFileInput.style.position = "absolute";
+          //_this3.hiddenFileInput.style.top = "0";
+          //_this3.hiddenFileInput.style.left = "0";
+          //_this3.hiddenFileInput.style.height = "0";
+          //_this3.hiddenFileInput.style.width = "0";
+          
+
+          document.querySelector("body").appendChild(_this3.hiddenFileInput);
+            
           return _this3.hiddenFileInput.addEventListener("change", function () {
             var files = _this3.hiddenFileInput.files;
-
+            
             if (files.length) {
               for (var _iterator10 = files, _isArray10 = true, _i10 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
                 var _ref9;

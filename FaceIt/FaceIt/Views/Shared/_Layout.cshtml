@@ -5,37 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/style/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/style/dropzone.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/style/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/style/jquery.fullPage.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/style/dropzone.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
    
 </head>
-<body>
+<body ng-app="analyzeApp" >
 
-    
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                @*<div class="navbar-header">
-                <a class="navbar-brand" href="#Chooser">AnalyzeIt</a>
-            </div>*@
-
-                <ul id="myMenu" class="nav navbar-nav">
-                    <li data-menuanchor="AnalyzeIt" class="active"><a href="#AnalyzeIt">Home</a></li>
-                    <li data-menuanchor="Chooser" class="active"><a href="#Chooser">AnalyzeIt</a></li>
-                    <li data-menuanchor="FaceDetect"><a href="#FaceDetect">Face Detect</a></li>
-                    <li data-menuanchor="EmotionExplorer"><a href="#EmotionExplorer">Emotion Explorer</a></li>
-                    <li data-menuanchor="ImageAnalyzer"><a href="#ImageAnalyzer">Image Analyzer</a></li>
-                    <li data-menuanchor="Contacts"><a href="#Contacts">Contacts</a></li>
-
-                    @*<li><a href="@Url.Action("Index", "Face")">Face Detect</a></li>
-                <li><a href="@Url.Action("Index", "Emotion")">Emotion Explorer</a></li>
-                <li><a href="@Url.Action("Index", "Image")">Image Analyzer</a></li>
-                <li><a href="@Url.Action("Index", "Contact")">Contacts</a></li>*@
-                </ul>
-            </div>
+    <nav id="myMenu" class="navbar fixed-top navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#AnalyzeIt">Home </a>
+            <a class="navbar-brand" href="#Chooser">AnalyzeIt</a>
+            <a class="navbar-brand" href="#FaceDetect">Face Detect</a>
+            <a class="navbar-brand" href="#EmotionExplorer">Emotion Explorer</a>
+            <a class="navbar-brand" href="#ImageAnalyzer">Image Analyzer</a>
+            <a class="navbar-brand" href="#Contacts">Contacts</a>
+        </div>
 </nav>
-    
+
+
+
+   
+
     <div class="jumbotron">
 
                 @if (IsSectionDefined("AnalyzeIt") && IsSectionDefined("Chooser"))
@@ -64,7 +56,10 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="~/Content/js/bootstrap.min.js"></script>
             <script src="~/Content/js/angular.js"></script>
+
+        <script src="~/Content/js/scrolloverflow.min.js"></script>
             <script src="~/Content/js/jquery.fullPage.js"></script>
+        <script src="~/Content/js/Chart.js"></script>
             <script src="~/Content/js/dropzone.js"></script>
             <script src="~/Content/js/webcam.js"></script>
             <script src="~/Content/js/help.js"></script>

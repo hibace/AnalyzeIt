@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.ProjectOxford.Common.Contract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -60,6 +61,8 @@ namespace FaceIt.Models
         private string _glasses;
 
         private IEnumerable<KeyValuePair<string, float>> _emotion;
+
+        //public EmotionScores Emotion { get; set; }
 
         private string _fileName;
         private string _filePath;

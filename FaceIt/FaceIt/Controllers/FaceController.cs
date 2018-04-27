@@ -14,6 +14,8 @@ using System.Drawing.Imaging;
 using VideoFrameAnalyzer;
 using OpenCvSharp;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace FaceIt.Controllers
 {
@@ -22,6 +24,8 @@ namespace FaceIt.Controllers
         private static string Token = ConfigurationManager.AppSettings["FaceServiceToken"];
         private static string EndPoint = ConfigurationManager.AppSettings["FaceServiceEndPoint"];
 
+        private static string ImageAnalyzerToken = ConfigurationManager.AppSettings["VisionServiceToken"];
+        private static string ImageAnalyzerEndPoint = ConfigurationManager.AppSettings["VisionServiceEndPoint"];
 
         private static string directory = "../UploadedFiles";
         private static string UplImageName = string.Empty;
@@ -299,6 +303,67 @@ namespace FaceIt.Controllers
                     ex.ToString();
                 }
             }
+        }
+
+        static byte[] GetImageAsByteArray(string imageFilePath)
+        {
+            FileStream fileStream = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
+            BinaryReader binaryReader = new BinaryReader(fileStream);
+            return binaryReader.ReadBytes((int)fileStream.Length);
+        }
+
+        [HttpGet]
+        public async Task<dynamic> GetImageAnalyzation()
+        {
+            ResultCollection.Clear();
+            DetectedFaces.Clear();
+            string responseString = "";
+
+
+            var FullImgPath = Server.MapPath(directory) + '/' + UplImageName as string;
+            var QueryFaceImageUrl = directory + '/' + UplImageName;
+
+            if (UplImageName != "")
+            {
+                //Create New Folder
+                CreateDirectory();
+
+                try
+                {
+
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", ImageAnalyzerToken);
+                    string requestParameters = "visualFeatures=Categories,Tags,Description,Color&language=en";
+                    string uri = ImageAnalyzerEndPoint + "?" + requestParameters;
+
+                    byte[] byteData = GetImageAsByteArray(FullImgPath);
+
+                    using (ByteArrayContent content = new ByteArrayContent(byteData))
+                    {
+                        
+                        content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+
+                        var response = await client.PostAsync(uri, content);
+
+                        responseString = await response.Content.ReadAsStringAsync();
+                        
+                    }
+                }
+                catch (HttpException ex)
+                {
+                    var MessageError = ex.ToString();
+                }
+            }
+            return new JsonResult
+            {
+                Data = new
+                {
+                    QueryFaceImage = QueryFaceImageUrl,
+                    MaxImageSize = MaxImageSize,
+                    ResponseString = responseString
+                },
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
         }
     }
 }

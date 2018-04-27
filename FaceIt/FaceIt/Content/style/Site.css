@@ -1,6 +1,7 @@
 ﻿body {
     /*padding-top: 50px;*/
     /*padding-bottom: 20px;*/
+    font-family: 'Segoe UI',SegoeUI,'Segoe WP',Tahoma,Arial,sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -58,22 +59,17 @@ textarea {
     color: red;
 }
 
-.facePreview_thumb_big {
+.facePreviewContainer {
+    display: block;
     position: relative;
-    display: grid;
+    text-align: start;
 }
 
-.facePreview_thumb_big .divRectangle_box {
-    opacity: .75;
-    transition: opacity .55s ease-out;
+.facePreviewContainer .facePreview_thumb_big {
+    display: block;
+
 }
 
-
-    .facePreview_thumb_big .divRectangle_box:hover {
-        opacity: .85;
-            
-        transition: opacity .55s ease-out;
-    }
 
 .facePreview_thumb_small {
     display: block;
@@ -96,30 +92,40 @@ textarea {
     padding: 0px;
 }
 
-    .facePreview_thumb_small ul li {
-        color: #222;
-        list-style-type: square;
-    }
-
+.facePreview_thumb_small ul li {
+    color: #222;
+    list-style-type: square;
+}
 
 
 
 .divRectangle_box:hover * {
-    opacity: 1;
+    opacity: 0.95;
+    transition: opacity .35s ease-out;
 }
 
+
+.visibleFalse {
+    visibility: hidden;
+    display: none;
+}
+
+
 .divRectangle_box {
-    border-radius: 2px;
+    /*border-radius: 2px;
     border: 2px solid #005ca4;
     box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;*/
+    border-radius: 2px;
+    border: 3px solid #0078d7;
+    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    /*left: -1000px;*/
+    opacity: 1;
     position: absolute;
-    /*top: -1000px;*/
 }
 
 .arrow {
-    border-bottom: 10px solid white;
+    border-bottom: 10px solid gray;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     height: 0;
@@ -131,34 +137,46 @@ textarea {
     opacity: 0;
 }
 
-.fTableinfo {
-    width: auto;
-    visibility: visible;
-    background-color: gray;
-    color: #fff;
-    padding: 5px;
-    z-index: 100;
+
+
+.tableShow {
+    border: 0px;
+    bottom: -42px;
+    height: 30px;
+    left: 65%;
+    margin-left: -90px;
+    font-size: 15px;
+    opacity: 1;
+    outline: none;
     position: absolute;
-    top: -5px;
-    right: 110%;
-    font-size: 12px;
-    line-height: 1.5;
-    border-collapse: unset;
-    font-family: 'Segoe UI',SegoeUI,'Segoe WP',Tahoma,Arial,sans-serif;
+    width: 180px;
+    opacity: 0;
 }
 
 
-.fTableinfo td {
-    text-align: right;
-    border: 1px solid pink;
-}
+    .tableShow table {
+        background-color: gray;
+        color: #fff;
+        padding: 3px;
+        font-size: 12px;
+        border-radius: 2px;
+        opacity: 0;
+        transition: opacity .35s ease-out;
+    }
 
-.fTableinfo th {
-    text-align: left;
-    font-weight: 600;
-    text-transform: uppercase;
-    border: 1px solid red;
-}
+        .tableShow table th {
+            font-weight: 600;
+            text-transform: uppercase;
+            vertical-align: top;
+            padding: 3px;
+        }
+
+        .tableShow table td {
+            text-align: right;
+            padding: 3px;
+        }
+
+
 
 /*.divRectangle_box .face-info:after {
     content: '';
@@ -171,17 +189,8 @@ textarea {
     border-color: transparent transparent transparent gray
 }*/
 
-.divRectangle_box:hover {
-    z-index: 100
-}
 
-.divRectangle_box:hover .fTableinfo {
-    visibility: visible
-}
 
-.divRectangle_box:active .fTableinfo {
-visibility: visible
-}
 .centerNav  {
 
 }
@@ -193,13 +202,13 @@ visibility: visible
 }
 
     .getCenterDiv h1 {
-        font-size: 5em;
+        font-size: 7em;
         font-weight: 900;
     
     }
 
     .getCenterDiv h3 {
-        font-size: 1.25em;
+        font-size: 1.35em;
         font-weight: 100;
         padding: 7px;
     }
@@ -216,7 +225,9 @@ visibility: visible
         padding: 7px;
     }
 .faceDetectMainDiv {
-    font-size: 14px;
+
+    margin: 0 auto;
+    text-align: center;
 }
 
 #buttonScroll {
@@ -235,4 +246,56 @@ visibility: visible
     vertical-align: middle;
     cursor: pointer;
     border: 1px solid ;
+}
+
+
+.demo-img-results {
+    overflow: auto;
+    background-color: #f4f4f4;
+    border: 1px #969696 solid;
+}
+
+/*.imageAnalyzeTable {
+    font-size: 12px;
+    padding:5px;
+    width: 50%;
+    background-color: #f4f4f4;
+}*/
+
+.imageAnalyzerTableInfo {
+    word-wrap: break-word;
+    width: 100%;
+    table-layout: fixed;
+    background-color: #f4f4f4;
+    border: 1px #969696 solid;
+    visibility: hidden;
+}
+
+    .imageAnalyzerTableInfo td {
+        word-break: break-word;
+        padding: 5px;
+    }
+
+    .imageAnalyzerTableInfo th {
+        vertical-align: top;    
+        padding: 5px;
+    }
+
+    .imageAnalyzerTableInfo thead {
+        border-bottom: 2px solid #dedede;
+        text-transform: uppercase;
+    }
+
+    .imageAnalyzerTableInfo .color-square {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 1px #000 solid;
+    }
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 80vh;
+    width: 80vw;
 }

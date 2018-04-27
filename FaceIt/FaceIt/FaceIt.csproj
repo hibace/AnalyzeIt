@@ -131,6 +131,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\js\Chart.js" />
     <Content Include="Content\img\EmotionExplorer.png" />
     <Content Include="Content\img\FaceDetection.png" />
     <Content Include="Content\img\ImageAnalyze.png" />
@@ -146,8 +147,13 @@
     <Content Include="Content\js\jquery.fullPage.js" />
     <Content Include="Content\js\mouth-min.js" />
     <Content Include="Content\js\mouth.js" />
+    <Content Include="Content\js\scrolloverflow.min.js" />
     <Content Include="Content\js\tracking-min.js" />
     <Content Include="Content\js\tracking.js" />
+    <Content Include="Content\style\bootstrap-grid.css" />
+    <Content Include="Content\style\bootstrap-grid.min.css" />
+    <Content Include="Content\style\bootstrap-reboot.css" />
+    <Content Include="Content\style\bootstrap-reboot.min.css" />
     <Content Include="Content\style\bootstrap.css" />
     <Content Include="Content\style\bootstrap.min.css" />
     <Content Include="Content\style\dropzone.css" />
@@ -927,6 +933,12 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Content\style\bootstrap-grid.css.map" />
+    <Content Include="Content\style\bootstrap-grid.min.css.map" />
+    <Content Include="Content\style\bootstrap-reboot.css.map" />
+    <Content Include="Content\style\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\style\bootstrap.css.map" />
+    <Content Include="Content\style\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Content\js\jquery-3.3.1.js" />
     <Content Include="Content\js\jquery-3.3.1.min.js">
