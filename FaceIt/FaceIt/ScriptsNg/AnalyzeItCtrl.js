@@ -357,7 +357,7 @@
                         datasets: [
                             {
                                 label: "Value",
-                                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#778899", "#CD853F", "#BA55D3"],
                                 data: [emValues[0].Value, emValues[1].Value, emValues[2].Value, emValues[3].Value, emValues[4].Value, emValues[5].Value, emValues[6].Value, emValues[7].Value]
                             }
                         ]
