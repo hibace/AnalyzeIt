@@ -1,4 +1,7 @@
-!(https://github.com/hibace/AnalyzeIt/blob/master/scr/AnalyzeIt.png)
+<p align="center">
+  <img src="https://github.com/hibace/AnalyzeIt/blob/master/scr/AnalyzeIt.png"/>
+  <img src="https://github.com/hibace/AnalyzeIt/blob/master/scr/AnalyzeIt.png" width="350"/>
+</p>
 
 # AnalyzeIt
 Web-application based on Microsoft cognitive services using ASP.NET MVC &amp; AngularJS
