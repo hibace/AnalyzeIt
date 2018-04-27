@@ -4,7 +4,7 @@
 
 # AnalyzeIt
 Web-application based on Microsoft cognitive services using ASP.NET MVC &amp; AngularJS
-
+<a href="https://github.com/hibace/AnalyzeIt/tree/master/scr"> Work Examples</a>
 This web application provides users detect faces, explorer emotions and analyze imagez uploaded from local device or by url.
 
 ## Used technologies:
