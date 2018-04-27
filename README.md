@@ -1,3 +1,5 @@
+!(https://github.com/hibace/AnalyzeIt/blob/master/scr/AnalyzeIt.png)
+
 # AnalyzeIt
 Web-application based on Microsoft cognitive services using ASP.NET MVC &amp; AngularJS
 
