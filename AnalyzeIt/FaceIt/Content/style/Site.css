@@ -58,37 +58,49 @@ textarea {
 .error {
     color: red;
 }
+.webCamPreview {
+    width:225px;
+    height: auto;
+    position: relative;
+}
+.webCamPreview button {
+    position: absolute;
+    left: 75%;
+    top: 88%;
+}
+
+
 
 .facePreviewContainer {
     display: block;
-    position: relative;
     text-align: start;
+    position:relative;
 }
 
 .facePreviewContainer .facePreview_thumb_big {
     display: block;
-
 }
 
 
 .facePreview_thumb_small {
     display: block;
     width: 100%;
-    max-height: 300px;
-    overflow-y: scroll;
+    /*max-height: 300px;
+    overflow-y: scroll;*/
     padding: 0px;
     margin: 0px;
 }
 
+
 .facePreview_thumb_small img {
     padding: 3px;
     border: 1px solid #eee;
-    margin: 2px;
+    margin-top: 5px;
 }
 
 .facePreview_thumb_small ul {
-    margin-top: 10px;
-    margin-left: 25px;
+    margin-top: 5px;
+    /*margin-left: 25px;*/
     padding: 0px;
 }
 
@@ -100,8 +112,8 @@ textarea {
 
 
 .divRectangle_box:hover * {
-    opacity: 0.95;
-    transition: opacity .35s ease-out;
+    visibility: visible;
+    background-color: gray; 
 }
 
 
@@ -112,88 +124,67 @@ textarea {
 
 
 .divRectangle_box {
-    /*border-radius: 2px;
-    border: 2px solid #005ca4;
-    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.3);
-    cursor: pointer;*/
     border-radius: 2px;
     border: 3px solid #0078d7;
     box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    opacity: 1;
     position: absolute;
 }
 
-.arrow {
-    border-bottom: 10px solid gray;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    height: 0;
-    width: 0;
-    position: absolute;
-    left: 50%;
-    margin-left: -5px;
-    bottom: -12px;
-    opacity: 0;
-}
 
-
-
-.tableShow {
-    border: 0px;
-    bottom: -42px;
-    height: 30px;
-    left: 65%;
-    margin-left: -90px;
-    font-size: 15px;
-    opacity: 1;
-    outline: none;
-    position: absolute;
-    width: 180px;
-    opacity: 0;
-}
-
-
-    .tableShow table {
+    .divRectangle_box .tableShow {
+        visibility: hidden;
+        width: auto;
+        left: 105%;
+        position: absolute;
         background-color: gray;
         color: #fff;
-        padding: 3px;
         font-size: 12px;
         border-radius: 2px;
-        opacity: 0;
-        transition: opacity .35s ease-out;
+        z-index: 100;
+        margin-left: 5px;
     }
 
-        .tableShow table th {
+        .divRectangle_box .tableShow::after {
+            content: '';
+            position: absolute;
+            top: 1%;
+            right: 100%;
+            border-width: 6px;
+            border-style: solid;
+            z-index: 100;
+            border-color: transparent gray transparent transparent;
+        }
+
+        .divRectangle_box .tableShow th {
             font-weight: 600;
             text-transform: uppercase;
             vertical-align: top;
             padding: 3px;
         }
 
-        .tableShow table td {
+        .divRectangle_box .tableShow td {
             text-align: right;
             padding: 3px;
         }
 
 
-
-/*.divRectangle_box .face-info:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent transparent gray
-}*/
-
-
-
-.centerNav  {
-
+.headerFaceDetectCenterDiv {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
 }
+
+    .headerFaceDetectCenterDiv h1 {
+        font-size: 7em;
+        font-weight: 900;
+    }
+
+    .headerFaceDetectCenterDiv h3 {
+        font-size: 1.35em;
+        font-weight: 100;
+        padding: 7px;
+    }
 
 .getCenterDiv {
     width: 80%;
@@ -208,6 +199,23 @@ textarea {
     }
 
     .getCenterDiv h3 {
+        font-size: 1.35em;
+        font-weight: 100;
+        padding: 7px;
+    }
+
+.contactDivCenter {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+    .contactDivCenter h1 {
+        font-size: 7em;
+        font-weight: 900;
+    }
+
+    .contactDivCenter h3 {
         font-size: 1.35em;
         font-weight: 100;
         padding: 7px;

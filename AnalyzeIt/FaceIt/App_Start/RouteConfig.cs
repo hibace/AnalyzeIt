@@ -16,7 +16,7 @@ namespace FaceIt
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "AnalyzeIt", id = UrlParameter.Optional }
+                defaults: new { controller = "Face", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

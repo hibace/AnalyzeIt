@@ -162,8 +162,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="keys.html" />
-    <Content Include="ScriptsNg\NewCtrl.js" />
-    <Content Include="ScriptsNg\FaceDetectionCtrl.js" />
+    <Content Include="ScriptsNg\AnalyzeItCtrl.js" />
     <Content Include="Content\js\webcam.js" />
     <Content Include="Content\js\webcam.swf" />
     <Content Include="Scripts\angular-animate.js" />
@@ -939,6 +938,7 @@
     <Content Include="Content\style\bootstrap-reboot.min.css.map" />
     <Content Include="Content\style\bootstrap.css.map" />
     <Content Include="Content\style\bootstrap.min.css.map" />
+    <None Include="Properties\PublishProfiles\AnalyzeIt - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Content\js\jquery-3.3.1.js" />
     <Content Include="Content\js\jquery-3.3.1.min.js">
@@ -954,25 +954,13 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ContactController.cs" />
-    <Compile Include="Controllers\EmotionController.cs" />
     <Compile Include="Controllers\FaceController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CameraResult.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\vmFace.cs" />
+    <Compile Include="Models\AIFace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceHelpers\CoreUtil.cs" />
-    <Compile Include="ServiceHelpers\ErrorTrackingHelper.cs" />
-    <Compile Include="ServiceHelpers\FaceListManager.cs" />
-    <Compile Include="ServiceHelpers\FaceServiceHelper.cs" />
-    <Compile Include="ServiceHelpers\ImageAnalyzer.cs" />
     <Compile Include="ServiceHelpers\UIHelper.cs" />
-    <Compile Include="ServiceHelpers\VisionServiceHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1001,10 +989,6 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Face\Index.cshtml" />
-    <Content Include="Views\Home\AnalyzeIt.cshtml" />
-    <Content Include="Views\Image\Index.cshtml" />
-    <Content Include="Views\Emotion\Index.cshtml" />
-    <Content Include="Views\Contact\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

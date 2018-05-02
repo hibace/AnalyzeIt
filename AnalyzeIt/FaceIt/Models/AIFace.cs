@@ -6,7 +6,7 @@ using System.Web;
 
 namespace FaceIt.Models
 {
-    public class vmFace
+    public class AIFace
     {
         #region Fields
 
@@ -60,9 +60,9 @@ namespace FaceIt.Models
         /// </summary>
         private string _glasses;
 
-        private IEnumerable<KeyValuePair<string, float>> _emotion;
+        //private IEnumerable<KeyValuePair<string, float>> _emotion;
 
-        //public EmotionScores Emotion { get; set; }
+        public EmotionScores Emotion { get; set; }
 
         private string _fileName;
         private string _filePath;
@@ -293,18 +293,18 @@ namespace FaceIt.Models
         /// <summary>
         /// Gets or sets a value indicating the emotion type 
         /// </summary>
-        public IEnumerable<KeyValuePair<string, float>> Emotion
-        {
-            get
-            {
-                return _emotion;
-            }
+        //public IEnumerable<KeyValuePair<string, float>> Emotion
+        //{
+        //    get
+        //    {
+        //        return _emotion;
+        //    }
 
-            set
-            {
-                _emotion = value;
-            }
-        }
+        //    set
+        //    {
+        //        _emotion = value;
+        //    }
+        //}
 
         #endregion Properties
 

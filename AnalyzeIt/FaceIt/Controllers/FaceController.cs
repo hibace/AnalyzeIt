@@ -30,18 +30,18 @@ namespace FaceIt.Controllers
         private static string directory = "../UploadedFiles";
         private static string UplImageName = string.Empty;
 
-        private ObservableCollection<vmFace> _detectedFaces = new ObservableCollection<vmFace>();
+        private ObservableCollection<AIFace> _detectedFaces = new ObservableCollection<AIFace>();
 
-        private ObservableCollection<vmFace> _resultCollection = new ObservableCollection<vmFace>();
+        private ObservableCollection<AIFace> _resultCollection = new ObservableCollection<AIFace>();
 
-        public ObservableCollection<vmFace> DetectedFaces
+        public ObservableCollection<AIFace> DetectedFaces
         {
             get
             {
                 return _detectedFaces;
             }
         }
-        public ObservableCollection<vmFace> ResultCollection
+        public ObservableCollection<AIFace> ResultCollection
         {
             get
             {
@@ -56,9 +56,6 @@ namespace FaceIt.Controllers
             }
         }
 
-
-
-        // GET: FaceDetection
         public ActionResult Index()
         {
             return View();
@@ -68,16 +65,14 @@ namespace FaceIt.Controllers
         public JsonResult SaveByUrl()
         {
             string message = string.Empty, fileName = string.Empty, actualFileName = string.Empty; bool flag = false;
-            //Requested File Collection
+          
             var request = System.Web.HttpContext.Current.Request.Form;
            
             
             if (request != null || request.Count != 0)
             {
-                //Create New Folder
                 CreateDirectory();
-
-                //Clear Existing File in Folder
+                
                 ClearDirectory();
                 
                 for (int i = 0; i < request.Count; i++)
@@ -122,14 +117,12 @@ namespace FaceIt.Controllers
         public JsonResult SaveCandidateFiles()
         {
             string message = string.Empty, fileName = string.Empty, actualFileName = string.Empty; bool flag = false;
-            //Requested File Collection
+            
             HttpFileCollection fileRequested = System.Web.HttpContext.Current.Request.Files;
             if (fileRequested != null)
             {
-                //Create New Folder
                 CreateDirectory();
-
-                //Clear Existing File in Folder
+                
                 ClearDirectory();
 
                 for (int i = 0; i < fileRequested.Count; i++)
@@ -162,7 +155,49 @@ namespace FaceIt.Controllers
                 }
             };
         }
-        
+
+        [HttpPost]
+        public JsonResult SaveBlob()
+        {
+            string message = string.Empty, fileName = string.Empty, actualFileName = string.Empty; bool flag = false;
+           
+            HttpFileCollection fileRequested = System.Web.HttpContext.Current.Request.Files;
+            if (fileRequested != null)
+            {
+                CreateDirectory();
+                ClearDirectory();
+
+                for (int i = 0; i < fileRequested.Count; i++)
+                {
+                    var file = Request.Files[i];
+                    actualFileName = file.FileName;
+                    fileName = Guid.NewGuid() + Path.GetExtension(file.FileName) + ".jpg";
+                    int size = file.ContentLength;
+
+                    try
+                    {
+                        file.SaveAs(Path.Combine(Server.MapPath(directory), fileName));
+                        message = "File uploaded successfully";
+                        UplImageName = fileName;
+                        flag = true;
+                    }
+                    catch (Exception)
+                    {
+                        message = "File upload failed! Please try again";
+                    }
+                }
+            }
+            return new JsonResult
+            {
+                Data = new
+                {
+                    Message = message,
+                    UplImageName = fileName,
+                    Status = flag
+                }
+            };
+        }
+
 
         [HttpGet]
         public async Task<dynamic> GetDetectedFaces()
@@ -176,18 +211,16 @@ namespace FaceIt.Controllers
 
             if (UplImageName != "")
             {
-                //Create New Folder
                 CreateDirectory();
 
                 try
                 {
-                    // Call detection REST API
                     using (var fStream = System.IO.File.OpenRead(FullImgPath))
                     {
-                        // User picked one image
-                        var imageInfo = UIHelper.GetImageInfoForRendering(FullImgPath);
+                        Bitmap img = new Bitmap(FullImgPath);
 
-                        // Create Instance of Service Client by passing Servicekey as parameter in constructor 
+                        var imageInfo = new Tuple<int, int>(img.Width, img.Height);//UIHelper.GetImageInfoForRendering(FullImgPath);
+                        
                         var faceServiceClient = new FaceServiceClient(Token, EndPoint);
 
                         Face[] faces = await faceServiceClient.DetectAsync(fStream, true, true, new FaceAttributeType[] { FaceAttributeType.Gender, FaceAttributeType.Age, FaceAttributeType.Smile, FaceAttributeType.Glasses, FaceAttributeType.Emotion });
@@ -198,7 +231,6 @@ namespace FaceIt.Controllers
 
                         foreach (var face in faces)
                         {
-                            //Create & Save Cropped Images
                             var croppedImg = Convert.ToString(Guid.NewGuid()) + ".jpeg" as string;
                             var croppedImgPath = directory + '/' + croppedImg as string;
                             var croppedImgFullPath = Server.MapPath(directory) + '/' + croppedImg as string;
@@ -213,7 +245,7 @@ namespace FaceIt.Controllers
                                 ((IDisposable)CroppedFace).Dispose();
 
 
-                            DetectedFaces.Add(new vmFace()
+                            DetectedFaces.Add(new AIFace()
                             {
                                 ImagePath = FullImgPath,
                                 FileName = croppedImg,
@@ -224,14 +256,13 @@ namespace FaceIt.Controllers
                                 Height = face.FaceRectangle.Height,
                                 FaceId = face.FaceId.ToString(),
                                 Gender = face.FaceAttributes.Gender,
-                                Age = string.Format("{0:#} years old", face.FaceAttributes.Age),
+                                Age = string.Format("{0:#} y. o.", face.FaceAttributes.Age),
                                 IsSmiling = face.FaceAttributes.Smile > 0.0 ? "Smile" : "Not Smile",
                                 Glasses = face.FaceAttributes.Glasses.ToString(),
-                                Emotion = face.FaceAttributes.Emotion.ToRankedList() //.OrderByDescending(x => x.Value).Take(1)
+                                Emotion = face.FaceAttributes.Emotion
                             });
                         }
-
-                        // Convert detection result into UI binding object for rendering
+                        
                         var rectFaces = UIHelper.CalculateFaceRectangleForRendering(faces, MaxImageSize, imageInfo);
                         foreach (var face in rectFaces)
                         {
@@ -239,11 +270,9 @@ namespace FaceIt.Controllers
                         }
                     }
                 }
-                catch (FaceAPIException)
+                catch (FaceAPIException ex)
                 {
-                    //var temp = ex.ErrorMessage;
-                    //var temp1 = ex.ErrorCode;
-                    //var temp2 = ex.HttpStatus.ToString();
+                    return ex;
                 }
             }
             return new JsonResult
@@ -325,7 +354,6 @@ namespace FaceIt.Controllers
 
             if (UplImageName != "")
             {
-                //Create New Folder
                 CreateDirectory();
 
                 try
